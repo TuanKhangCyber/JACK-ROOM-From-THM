@@ -1,4 +1,4 @@
-#JACK-ROOM-From-THM
+<h1>JACK-ROOM-From-THM</h1>
 TryHackMe machine “Jack”: a step-by-step guide from reconnaissance and enumeration to exploitation and privilege escalation. Includes the exact commands used, attacker reasoning, and tips to help beginners quickly grasp the pentesting workflow.
 <h3>  <img width="791" height="860" alt="image" src="https://github.com/user-attachments/assets/978b0eea-0802-441a-b8bc-0dc543775ae5" />
  </h3>
@@ -100,7 +100,7 @@ Then click ‘Forward.’
 <h3>I gained access and obtained a user shell. I returned to the home directory, changed into user jack’s home, and found the user.txt flag.</h3>
 <img width="1420" height="690" alt="image" src="https://github.com/user-attachments/assets/542e3869-07b1-47f9-8699-4acf33d081bd" />
 
-<h3>I navigated to the backups directory and recovered the id_rsam private key, which I used to authenticate via SSH (the lab had SSH enabled).</h3>
+<h3>I navigated to the backups directory and recovered the id_rsa private key, which I used to authenticate via SSH (the lab had SSH enabled).</h3>
 <img width="1310" height="528" alt="image" src="https://github.com/user-attachments/assets/e5828fb8-4348-47f5-89e0-3acf4d841baa" />
 <img width="1029" height="528" alt="image" src="https://github.com/user-attachments/assets/bf6955fb-2406-4a37-ab7f-2fd8c428ecef" />
 <h5>code ssh: ssh -i "your file ssh" jack@jack.thm</h5>
@@ -137,8 +137,3 @@ pty.spawn("/bin/bash")
 <img width="1315" height="429" alt="image" src="https://github.com/user-attachments/assets/75208eeb-2af6-424e-ae60-b5d522737337" />
 
 <h1>THE END</h1>
-
-
-
-
-
