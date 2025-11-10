@@ -30,7 +30,7 @@ TryHackMe machine “Jack”: a step-by-step guide from reconnaissance and enume
 # Save: Ctrl+O, Enter. Exit: Ctrl+X
 <h2>Verify connectivity</h2>
 # ping the hostname
-<h5>>ping -c 3 jack.thm</h5
+<h5>ping -c 3 jack.thm</h5>
 
 <h1>2. Reconnaissance & Scanning</h1>
 <h2>Performed an nmap scan which revealed an HTTP service hosting WordPress.</h2>
@@ -44,3 +44,30 @@ TryHackMe machine “Jack”: a step-by-step guide from reconnaissance and enume
 <h5>use the tool with a command: wpscan -e u,ap --url http://jack.thm</h5>
 I see 3 users in WordPress
 <img width="1482" height="532" alt="user" src="https://github.com/user-attachments/assets/532d3a37-9a87-44a5-b13d-c75faf65c317" />
+
+Write the names of 3 users into the users.txt file and proceed to scan passwords using a wordlist
+<img width="1450" height="624" alt="4_doPass" src="https://github.com/user-attachments/assets/9b6db981-3e4b-4304-8c86-5ed08f1b5504" />
+
+I already have Wendy's password
+<img width="1913" height="641" alt="5_coPass" src="https://github.com/user-attachments/assets/80d2b1c7-8aed-40fc-a5f7-e1bf38ff90d7" />
+
+Login page wordpress http://jack.thm/wp-login.php
+<img width="657" height="707" alt="5_5" src="https://github.com/user-attachments/assets/87551683-70b4-419d-b78c-4060f1d763bf" />
+
+<h1>3. Service Exploitation</h1>
+<h2>I conducted a WordPress vulnerability search and identified it in the file 44595.rb.</h2>
+
+<h5>I use the command: searchsploit wordpress privilege</h5>
+<img width="1911" height="108" alt="6" src="https://github.com/user-attachments/assets/1b518b28-3780-4b52-a250-b1a311769cec" />
+
+I see and identify that the reasonable vulnerability is the file 44595.rb
+<img width="1885" height="294" alt="7" src="https://github.com/user-attachments/assets/acd61079-3af7-452e-8cc5-e9b87cea87c9" />
+
+I use a command to download that file to my computer
+<h5>searchsploit -m 44595.rb</h5>
+
+<h1>4. Initial Access</h1>
+<h2>After completing the other parts, I will use Burp Suite to attack the vendor for this part.</h2>
+
+First, go to Burp Suite to enable intercept in the proxy section.
+<img width="1399" height="434" alt="image" src="https://github.com/user-attachments/assets/67363202-95ee-4a97-a2c7-52217e743e82" />
