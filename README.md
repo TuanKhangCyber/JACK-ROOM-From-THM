@@ -71,3 +71,18 @@ I use a command to download that file to my computer
 
 First, go to Burp Suite to enable intercept in the proxy section.
 <img width="1399" height="434" alt="image" src="https://github.com/user-attachments/assets/67363202-95ee-4a97-a2c7-52217e743e82" />
+
+At that time, I logged into WordPress with the username and password I had previously obtained, went to the profile section, and clicked update.
+<img width="844" height="701" alt="image" src="https://github.com/user-attachments/assets/c930fd6e-6ae7-4ed3-8932-769493210734" />
+===============
+<img width="611" height="486" alt="image" src="https://github.com/user-attachments/assets/220b6db3-da28-4754-a74d-fb7ce21485e6" />
+===============
+<img width="931" height="490" alt="image" src="https://github.com/user-attachments/assets/0c1bbe19-c514-4e49-9f59-5fe6fe1fe9c3" />
+
+When you press update, you will go into Burp Suite, filter out the link for the update part, and proceed to forward from the vulnerability in the file 44595.rb.
+<img width="1606" height="306" alt="image" src="https://github.com/user-attachments/assets/5d610188-18d2-42d1-abcd-bc8379e873f5" />
+===============
+
+
+
+
